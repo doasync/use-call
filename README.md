@@ -34,7 +34,7 @@ yarn add use-call
   const [user, userError, userLoading] = useAsyncCall(fetchUser, 120)
 
   // Call once
-  const fetchUsersOnce = once(fetchUsers)
+  const fetchUsersOnce = once(fetchUsers) // not in render
   const usersPromise = useCall(fetchUsersOnce, 234)
   const [users] = useAsyncCall(fetchUsersOnce, 120)
 ```
