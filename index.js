@@ -7,7 +7,7 @@ const { useRef } = require('react');
 
 const once = (fn) => {
   if (typeof fn !== 'function') {
-    throw new Error(`expected a function but got: ${fn}`);
+    throw new Error(`expected a function but got: ${typeof fn}`);
   }
 
   let called = false;
@@ -34,7 +34,7 @@ const useCall = (fn, ...args) => {
       fnRef.current = fn;
       result.current = fn(...args);
     } else {
-      throw new Error(`expected a function but got: ${fn}`);
+      throw new Error(`expected a function but got: ${typeof fn}`);
     }
   }
 
