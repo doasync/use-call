@@ -1,11 +1,9 @@
+/* eslint-disable no-param-reassign */
+
 const { usePromise } = require('use-promise');
 const { useRef } = require('react');
 
-/**
- * Decorator for calling a function only once
- */
-
-const once = (fn) => {
+const once = (fn, config = { attach: false, strict: false }) => {
   if (typeof fn !== 'function') {
     throw new Error(`expected a function but got: ${typeof fn}`);
   }
@@ -14,16 +12,22 @@ const once = (fn) => {
   let result;
 
   return (...args) => {
-    if (called) return result;
+    if (called) {
+      if (config.strict === true) {
+        const name = fn.displayName || fn.name || '<anonymous>';
+        throw new Error(`Function \`${name}\` can only be called once`);
+      }
+      return result;
+    }
     called = true;
     result = fn(...args);
+    if (config.attach === true) {
+      fn.once = result;
+      fn.called = called;
+    }
     return result;
   };
 };
-
-/**
- * Use a function call and save it to a ref
- */
 
 const useCall = (fn, ...args) => {
   const result = useRef(null);
@@ -40,10 +44,6 @@ const useCall = (fn, ...args) => {
 
   return result.current;
 };
-
-/**
- * Use promise from an async function call
- */
 
 const useAsyncCall = (fn, ...args) => usePromise(useCall(fn, ...args));
 
