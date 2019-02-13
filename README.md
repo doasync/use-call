@@ -39,5 +39,15 @@ yarn add use-call
   const [users] = useAsyncCall(fetchUsersOnce, { userId: 234 })
 ```
 
+You can pass config object to `once` as a second argument:
+
+```js
+  once(getUsers, { attach: true, strict: true })
+  const users = getUsers.once({ userId: 234 }) // attached
+  console.log(getUsers.once.called) // true
+  console.log(getUsers.once.cache) // users
+  getUsers.once({ userId: 234 }) // throws
+```
+
 ### Author
 @doasync
