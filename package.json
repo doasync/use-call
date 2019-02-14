@@ -1,7 +1,7 @@
 {
   "name": "use-call",
   "description": "useCall React hook",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "author": {
     "name": "DoAsync",
     "email": "doasync@gmail.com"
