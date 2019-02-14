@@ -8,24 +8,29 @@ const once = (fn, config = { attach: false, strict: false }) => {
     throw new Error(`expected a function but got: ${typeof fn}`);
   }
 
+  const { attach, strict } = config;
+  const name = fn.displayName || fn.name || '<anonymous>';
+  let cache;
+
   f.called = false;
 
-  if (config.attach === true) {
+  if (attach === true) {
     fn.once = f;
   }
 
   function f (...args) {
     if (f.called) {
-      if (config.strict === true) {
-        const name = fn.displayName || fn.name || '<anonymous>';
-        throw new Error(`Function \`${name}\` can only be called once`);
+      if (strict === true) {
+        throw new Error(`function "${name}" can only be called once`);
       }
-      return f.cache;
+      return cache;
     }
-    f.called = true;
-    f.cache = fn(...args);
 
-    return f.cache;
+    f.called = true;
+    cache = fn(...args);
+    f.cache = () => cache;
+
+    return cache;
   }
 
   return f;
