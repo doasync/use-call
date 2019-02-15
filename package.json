@@ -1,16 +1,16 @@
 {
   "name": "use-call",
   "description": "useCall React hook",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": {
     "name": "DoAsync",
     "email": "doasync@gmail.com"
   },
   "main": "index.js",
   "dependencies": {
+    "once-only": "^1.0.2",
     "react": "^16.8.1",
-    "use-promise": "^1.0.0",
-    "once-only": "^1.0.2"
+    "use-promise": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
