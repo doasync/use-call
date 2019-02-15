@@ -53,9 +53,9 @@ const [company] = useAsyncCall(fetchCompany, { companyId: 234 })
 const [user, userError, userLoading] = useAsyncCall(fetchUser, 120) // id
 ```
 
-#### `usePromise`
+## Useful packages
 
-An optimized hook for handling promises in React
+`usePromise` hook is used to handle promises in `useAsyncCall`
 
 See docs: https://github.com/doasync/use-promise
 
@@ -63,26 +63,15 @@ See docs: https://github.com/doasync/use-promise
 const [data, dataError, loading] = usePromise(fetchDataPromise)
 ```
 
-#### `once`
+---
 
-Create a once-only function
+Use `once-only` package to create a function to be called once
 
 See docs: https://github.com/doasync/once-only
 
 ```js
-const fetchUsersOnce = once(fetchUsers) // not in render
+const fetchUsersOnce = onceOnly(fetchUsers) // not in render
 const usersPromise = useCall(fetchUsersOnce, 234)
-```
-
-You can pass config object to `once` as a second argument:
-
-```js
-  once(getUsers, { attach: true, strict: true })
-  const users = getUsers.once({ userId: 234 }) // attached
-  console.log(getUsers.once.called) // true
-  console.log(getUsers.once.cache) // () => users
-  const users = getUsers.once.cache()
-  getUsers.once({ userId: 234 }) // throws
 ```
 
 ### Tip

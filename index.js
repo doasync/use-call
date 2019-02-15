@@ -2,7 +2,6 @@
 
 const { useRef } = require('react');
 const { usePromise } = require('use-promise');
-const { onceOnly: once } = require('once-only');
 
 const useCall = (fn, ...args) => {
   const result = useRef(null);
@@ -23,8 +22,6 @@ const useCall = (fn, ...args) => {
 const useAsyncCall = (fn, ...args) => usePromise(useCall(fn, ...args));
 
 module.exports = {
-  once,
   useCall,
   useAsyncCall,
-  usePromise
 };
